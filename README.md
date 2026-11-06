@@ -11,7 +11,7 @@ Turn a rough feature prompt into a short Technical Implementation Document with 
 7. Testing Requirements
 8. Developer Self-Review Checklist
 
-The output is short, in simple Indian English, with no code and no technology names unless your prompt names them. A flow chart is optional, and the skill asks first.
+The output is a Word (.docx) file, short, in simple Indian English, with no code and no technology names unless your prompt names them. A flow chart is optional, and the skill asks first.
 
 ## Scope rules
 
@@ -84,11 +84,11 @@ The exact folders depend on the tool and on the version of the CLI. Run `npx ski
 3. Ask: "Create the implementation document for this."
 4. The skill answers whether you need a flow chart, writes the document, and lists every **Clarification Required** item.
 
-In a tool that can read your project, the document is saved as `docs/<feature-name>-implementation.md`.
+The document is a Word file. In a tool that can read your project, it is saved as `docs/<feature-name>-implementation.docx`.
 
 ## ChatGPT and Gemini
 
-These tools do not read skill folders. Open `skills/task-implementation-doc-skill/SKILL.md`, copy the text, and paste it into the instructions of a custom GPT (ChatGPT) or a Gem (Gemini). Without access to your project, the skill works only from your prompt and marks dependencies as "to be checked in the code".
+These tools do not read skill folders. Open `skills/task-implementation-doc-skill/SKILL.md`, copy the text, and paste it into the instructions of a custom GPT (ChatGPT) or a Gem (Gemini). Without access to your project, the skill works only from your prompt.
 
 ## Repository layout
 

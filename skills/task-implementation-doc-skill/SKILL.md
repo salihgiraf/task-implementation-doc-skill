@@ -1,6 +1,6 @@
 ---
 name: task-implementation-doc-skill
-description: Turn a rough feature prompt into a short Technical Implementation Document with 8 fixed headings, strictly within the prompt's scope. Works in Claude, Cursor, GitHub Copilot, ChatGPT and Gemini.
+description: Turn a rough feature prompt into a short Technical Implementation Document (Word .docx file) with 8 fixed headings, strictly within the prompt's scope. Works in Claude, Cursor, GitHub Copilot, ChatGPT and Gemini.
 ---
 
 # Technical Implementation Document from a Rough Prompt
@@ -28,12 +28,21 @@ First check what your environment can do, then follow the matching mode.
 
 | Mode | When | What to do |
 | --- | --- | --- |
-| Repo mode | You can read the project files (Cursor, GitHub Copilot in agent or workspace mode, Claude Code, or any agent with the repo open) | Search the codebase for dependencies and real names. Write the document as one markdown file in the project, for example `docs/<feature-name>-implementation.md`, and tell the user the path. |
-| Chat mode | You cannot see the project (ChatGPT, Gemini, Claude chat, Copilot chat without the repo) | Work only from the rough prompt. In Dependencies, list what the prompt implies and mark it "to be checked in the code". Give the full document in one reply as markdown, so the user can copy it. If a doc or file tool is available, create the doc there instead. |
+| Repo mode | You can read the project files (Cursor, GitHub Copilot in agent or workspace mode, Claude Code, or any agent with the repo open) | Search the codebase for dependencies and real names. Save the document as a Word file in the project, for example `docs/<feature-name>-implementation.docx`, and tell the user the path. |
+| Chat mode | You cannot see the project (ChatGPT, Gemini, Claude chat, Copilot chat without the repo) | Work only from the rough prompt. In Dependencies, list what the prompt implies. Create the Word file and give the user the file to download. |
 
 In chat mode, if the user can paste a few related files (models, routes, status constants), ask once and use them to check dependencies.
 
-Use only plain markdown: headings, tables, bullets and `- [ ]` tasks. These render in every tool.
+## Output file format: Word (.docx)
+
+The final deliverable is always a Word document (`.docx`), because developers and QA share it by email and edit it in Word. Do not hand over the document as markdown or plain chat text.
+
+- Name the file `<feature-name>-implementation.docx`.
+- Use your tool's own way to create Word files: a docx or document skill if one is available, a document library in a script, or write markdown first and convert it to `.docx`. Pick whatever works in your environment. Do not rely on one specific tool.
+- Use real Word structure: the feature name as the Title, the date under it, the 8 headings as Heading 1, real tables with a header row, bullets and numbered lists. Do not leave markdown symbols (`#`, `|`, `**`, backticks) in the file.
+- Show the exact table names, column names, values and role names in a monospace font in place of backticks.
+- Show the checklist items in section 8 as checkbox lines using the ☐ character.
+- If your environment truly cannot create a file (for example a chat without file or code tools), give the full document in one reply as markdown and say in one line that it can be pasted into Word. This is the last option.
 
 ## Output rules
 
@@ -59,7 +68,7 @@ Use only plain markdown: headings, tables, bullets and `- [ ]` tasks. These rend
 - A flow chart is not mandatory.
 - Before drawing one, ask the user: "Do you need a flow chart in Workflow Understanding?" Ask this together with any other question, in one message.
 - If the user cannot be asked (unattended run), skip the chart and say so in one line.
-- Without a chart, Workflow Understanding is a lead sentence plus short numbered steps that follow the rough prompt. With a chart, keep the same steps under it. Use a Mermaid block in markdown output. If the tool cannot render Mermaid, use a simple text flow with arrows instead.
+- Without a chart, Workflow Understanding is a lead sentence plus short numbered steps that follow the rough prompt. With a chart, keep the same steps under it. A Word file cannot render Mermaid, so draw the chart as an image inserted in the document if your tool can, or else as a simple text flow with arrows (for example `Step A → Step B → Step C`).
 
 ## Dependencies (section 3)
 
@@ -68,7 +77,11 @@ Section 3 is about what this feature uses and what it can affect. It is not a li
 - **Repo mode:** search the codebase. Identify all internal and external dependencies: modules, features, functions, tables, jobs, mails, roles, settings and existing workflows that may be affected. Check other places that update the same status or the same tables. Report what you found in a table: Type, Item, Why it matters.
 - **If the rough prompt has a Dependencies note** (for example "does not affect any other module" or "no external package is used"), use it as the stated position. In repo mode, still check the code. If the code shows a conflict, tell the user in the chat reply and write what the code shows.
 - **External dependencies and packages:** mention them only if the rough prompt mentions them. If the prompt says none, or says nothing, write "None expected". Existing services that the feature must use (mail service, queue, role check) can be listed as existing, without product names.
-- **Chat mode:** list what the rough prompt implies (tables, roles, settings, mail, queue) and mark "to be checked in the code".
+- **Chat mode:** list what the rough prompt implies (tables, roles, settings, mail, queue) in the same table.
+
+## No disclaimer notes in the document
+
+The document contains only the title, the date and the 8 sections. Do not add a note, banner or footer about how it was written, for example that no project code was found, that it is based only on the rough prompt, or that items need to be checked in the code. The user does not want it. If the code could not be checked, say so in the chat reply (see "Before you finish"), never in the document.
 
 ## Content of each section
 
@@ -103,7 +116,8 @@ Everything must come from the rough prompt. Do not add new features, fields, API
 - Check that every missing detail is marked `Clarification Required` in its section.
 - Check that the section references in the checklist point to sections that exist.
 - Check that no technology name and no code block is present.
-- In the chat reply, give one line about the document (or its file path), then a short list of all Clarification Required items, and the question about the flow chart if it was not asked yet.
+- Check that the file is a real `.docx` and that no disclaimer note is in it.
+- In the chat reply, give one line with the file path of the Word document, a short list of all Clarification Required items, and the question about the flow chart if it was not asked yet. In chat mode, add one line that the project code was not checked.
 
 ## How to install (for the user)
 
