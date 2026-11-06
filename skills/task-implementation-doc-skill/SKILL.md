@@ -62,7 +62,8 @@ The final deliverable is always a Word document (`.docx`), because developers an
 - Name the file `<feature-name>-implementation.docx`.
 - Use your tool's own way to create Word files: a docx or document skill if one is available, a document library in a script, or write markdown first and convert it to `.docx`. Pick whatever works in your environment. Do not rely on one specific tool.
 - Use real Word structure: the feature name as the Title, the date under it, the 8 headings as Heading 1, real tables with a header row, bullets and numbered lists. Do not leave markdown symbols (`#`, `|`, `**`, backticks) in the file.
-- Show the exact table names, column names, values and role names in a monospace font in place of backticks.
+- Set the font to Arial for the whole document: body text, headings, the title, tables and checklist lines. Set it in the document's base styles (Normal, Title, Heading 1, table text), not only on each run, so text added later in Word stays in Arial. Use Helvetica only if Arial is not available. Do not use any other font, and do not use a theme font that can change the look on another machine.
+- Show the exact table names, column names, values and role names in Arial bold in place of backticks. A different monospace font would break the single-font rule.
 - Show the checklist items in section 8 as checkbox lines using the ☐ character.
 - If your environment truly cannot create a file (for example a chat without file or code tools), give the full document in one reply as markdown and say in one line that it can be pasted into Word. This is the last option.
 
@@ -82,7 +83,7 @@ The final deliverable is always a Word document (`.docx`), because developers an
 4. Language: simple Indian English. Short sentences. Easy to understand.
 5. Do not include code, code blocks, SQL or JSON samples. If the user wants a flow chart, it is a picture, not code (see "Flow chart").
 6. Do not name any framework, language, library, package or tool (for example a backend framework, a frontend library, a test tool, a mail testing tool) unless the rough prompt itself names it. Say "backend", "CRM page", "queue", "mail service" instead.
-7. Use the exact table names, column names, values, role names and texts from the rough prompt. Put them in code formatting inside sentences and tables.
+7. Use the exact table names, column names, values, role names and texts from the rough prompt. Show them in bold Arial inside sentences and tables (see "Output file format").
 8. If a name or text in the rough prompt looks like a spelling mistake (for example a role name or a status value), use the real name from the code in repo mode. Otherwise use it as written. Do not flag it in the document.
 
 ## Flow chart (optional, Mermaid design)

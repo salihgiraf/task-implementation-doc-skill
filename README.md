@@ -11,7 +11,7 @@ Turn a rough feature prompt into a short Technical Implementation Document with 
 7. Testing Requirements
 8. Developer Self-Review Checklist
 
-The output is a Word (.docx) file, short, in simple Indian English, with no code and no technology names unless your prompt names them. A flow chart is optional, and the skill asks first. If you say yes, it is designed in Mermaid and inserted in the Word file as a picture.
+The output is a Word (.docx) file in Arial, short, in simple Indian English, with no code and no technology names unless your prompt names them. A flow chart is optional, and the skill asks first. If you say yes, it is designed in Mermaid and inserted in the Word file as a picture.
 
 ## Scope rules
 
