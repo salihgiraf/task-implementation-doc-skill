@@ -73,15 +73,19 @@ The final deliverable is always a Word document (`.docx`), because developers an
 2. Title at the top: the feature name, with today's date under it.
 3. Keep it short. One lead sentence per section, then one table or a few bullets. No sub-headings, no long paragraphs.
 4. Language: simple Indian English. Short sentences. Easy to understand.
-5. Do not include code, code blocks, SQL or JSON samples.
+5. Do not include code, code blocks, SQL or JSON samples. The only exception is the Mermaid flow chart in Workflow Understanding.
 6. Do not name any framework, language, library, package or tool (for example a backend framework, a frontend library, a test tool, a mail testing tool) unless the rough prompt itself names it. Say "backend", "CRM page", "queue", "mail service" instead.
 7. Use the exact table names, column names, values, role names and texts from the rough prompt. Put them in code formatting inside sentences and tables.
 8. If a name or text in the rough prompt looks like a spelling mistake (for example a role name or a status value), use the real name from the code in repo mode. Otherwise use it as written. Do not flag it in the document.
 
-## Flow chart is optional
+## Flow chart (Mermaid)
 
-- A flow chart is not mandatory, and the skill does not ask about it. Draw one only if the user asked for a flow chart in the prompt. Otherwise leave it out.
-- Without a chart, Workflow Understanding is a lead sentence plus short numbered steps that follow the rough prompt. With a chart, keep the same steps under it. A Word file cannot render Mermaid, so draw the chart as an image inserted in the document if your tool can, or else as a simple text flow with arrows (for example `Step A → Step B → Step C`).
+Workflow Understanding has a flow chart under the lead sentence, followed by the short numbered steps. Do not ask the user whether they want it. The chart is always written as Mermaid (a `flowchart TD` diagram), because that is the format the team uses and it is easy to edit later.
+
+- The chart follows the steps of the rough prompt in the same order: user action, checks, updates, mail, history entry, final result. Add a branch only for a decision the prompt states (for example approve and reject). Keep node labels short and use the exact names from the prompt.
+- Word cannot render Mermaid text by itself. Render the Mermaid diagram to an image (PNG or SVG) with whatever your tool offers (for example a Mermaid command line renderer or a diagram skill) and insert the image in the document under Workflow Understanding.
+- If you cannot render it, insert the Mermaid source as plain monospace text in that place, so nothing is lost and the user can paste it into any Mermaid viewer. Never replace it with an arrow list.
+- This Mermaid chart is the one exception to the "no code" rule. Keep the chart small, no more than about 12 nodes.
 
 ## Dependencies (section 3)
 
@@ -101,7 +105,7 @@ The document contains only the title, the date and the 8 sections. Do not add a 
 Everything must come from the rough prompt (or, in repo mode, the code). Do not add new features, fields, APIs or rules. Where the prompt is silent on something the developer needs, close the gap as described in "Closing gaps without asking" and move on. Keep each point to one table row.
 
 1. **Logical Scenarios** — one table: Type, Scenario, Expected result. Cover: normal, alternative, negative, empty data, duplicate data, invalid input, permission or role, edge cases, status management, error handling. Each scenario must follow from a requirement in the prompt (for example, what happens when a stated rule, filter, role or input is not met). Skip a type if nothing in the prompt relates to it. For error handling, give the code and a simple message only where the behaviour is clear from the prompt. Otherwise describe the expected behaviour in plain words (for example "request is rejected with a clear message") and leave out codes and exact text.
-2. **Workflow Understanding** — lead sentence, optional chart, short numbered steps from the user's action to the final result, in the order given in the prompt. Say that the database changes are in one transaction only if the prompt says so.
+2. **Workflow Understanding** — lead sentence, Mermaid flow chart, short numbered steps from the user's action to the final result, in the order given in the prompt. Say that the database changes are in one transaction only if the prompt says so.
 3. **Dependencies** — as described above.
 4. **Integration** — a table of the APIs and the CRM page that the prompt asks for (purpose, who can use it). Method, URL, parameters, response fields and mail content are written only if the prompt gives them. Otherwise leave that detail out of the row. Add only the integration points the prompt implies (for example mail, existing screens that read the new rows).
 5. **Database Requirements And Database Mapping** — one table: Table, Action, Columns and values. Show the list filter, each update, each insert, and what stays NULL, exactly as the prompt says. Where the prompt gives a rule for building a list (for example an email list with an exclusion), write the rule in one short paragraph. If the prompt does not ask for a new table, column or index, write "No new table or column". Do not suggest anything beyond the prompt (index, unique key, NULL check).
@@ -128,7 +132,7 @@ Everything must come from the rough prompt (or, in repo mode, the code). Do not 
 - Check that nothing was added beyond the prompt: no extra feature, field, API, parameter or rule.
 - Check that the document has no "Clarification Required", "TBD", "to be confirmed" or "assumed" text, and no open questions.
 - Check that the section references in the checklist point to sections that exist.
-- Check that no technology name and no code block is present.
+- Check that no technology name and no code block is present, apart from the Mermaid chart, and that the chart is there as an image (or as Mermaid text if it could not be rendered).
 - Check that the file is a real `.docx` and that no disclaimer note is in it.
 - Do not ask the user any question. The chat reply is one line with the file path of the Word document. Add one more short line only if you made a choice in step 3 of "Closing gaps without asking" that the user may want to correct.
 

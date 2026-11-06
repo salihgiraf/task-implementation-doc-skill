@@ -11,7 +11,7 @@ Turn a rough feature prompt into a short Technical Implementation Document with 
 7. Testing Requirements
 8. Developer Self-Review Checklist
 
-The output is a Word (.docx) file, short, in simple Indian English, with no code and no technology names unless your prompt names them. A flow chart is included only if your prompt asks for one.
+The output is a Word (.docx) file, short, in simple Indian English, with no code and no technology names unless your prompt names them. Workflow Understanding includes a flow chart drawn in Mermaid and inserted in the Word file as an image.
 
 ## Scope rules
 
