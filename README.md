@@ -11,13 +11,13 @@ Turn a rough feature prompt into a short Technical Implementation Document with 
 7. Testing Requirements
 8. Developer Self-Review Checklist
 
-The output is a Word (.docx) file, short, in simple Indian English, with no code and no technology names unless your prompt names them. Workflow Understanding includes a flow chart drawn in Mermaid and inserted in the Word file as an image.
+The output is a Word (.docx) file, short, in simple Indian English, with no code and no technology names unless your prompt names them. A flow chart is optional, and the skill asks first. If you say yes, it is designed in Mermaid and inserted in the Word file as a picture.
 
 ## Scope rules
 
 - No additional features or functionality, and no expansion of the original scope.
 - No invented database fields, APIs or business logic.
-- Gaps are closed by the skill itself, from the code or the plainest reading of your prompt. The document has no clarification or open-question items, and the skill does not ask you questions.
+- Missing information is asked about in the chat, before the document is written. The final document has no clarification or open-question items, because your answers are written in as normal requirements.
 - The same document structure for every developer.
 - Only relevant requirements are included.
 
@@ -82,7 +82,8 @@ The exact folders depend on the tool and on the version of the CLI. Run `npx ski
 1. Open your project in the tool (Claude Code, Codex, Cursor or GitHub Copilot).
 2. Paste a rough prompt: bullets about the feature, the tables to update, the roles and the mails.
 3. Ask: "Create the implementation document for this."
-4. The skill writes the document straight away and replies with the file path.
+4. The skill asks its questions in one message: whether you need a flow chart, and any missing details. Answer them.
+5. The skill writes the Word document with your answers and replies with the file path.
 
 The document is a Word file. In a tool that can read your project, it is saved as `docs/<feature-name>-implementation.docx`.
 
