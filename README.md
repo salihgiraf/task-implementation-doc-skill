@@ -82,7 +82,7 @@ The exact folders depend on the tool and on the version of the CLI. Run `npx ski
 1. Open your project in the tool (Claude Code, Codex, Cursor or GitHub Copilot).
 2. Paste a rough prompt: bullets about the feature, the tables to update, the roles and the mails.
 3. Ask: "Create the implementation document for this."
-4. The skill asks its questions in one message: whether you need a flow chart, and any missing details. Answer them.
+4. The skill asks its questions one at a time: first any missing details, and last whether you need a flow chart. Answer each one, and it moves to the next.
 5. The skill writes the Word document with your answers and replies with the file path.
 
 The document is a Word file. In a tool that can read your project, it is saved as `docs/<feature-name>-implementation.docx`.

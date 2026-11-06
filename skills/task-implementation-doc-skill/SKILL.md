@@ -28,11 +28,13 @@ Questions belong in the chat, before the document. The document itself must read
 
 **Step 1: find the gaps.** Read the prompt as a whole. In repo mode, also check the code. Many gaps close by themselves this way: the answer is elsewhere in the prompt or in the code, or follows directly from a stated rule (for example, a role that can approve can also view). A gap is real only if a developer would have to guess and a wrong guess would change the work: a missing status value, an unclear role, mail content, an API detail the prompt promises but does not give, a conflict between the prompt and the code.
 
-**Step 2: ask once, in one message.** Send one message that has:
-1. The flow chart question, always: "Do you need a flow chart in Workflow Understanding?" (see "Flow chart" below).
-2. Each real gap as a short numbered question. Name the section it affects. Where one answer is likely, offer it as a suggestion the user can accept with "ok". Do not ask about things the prompt or the code already answers, and do not pad the list.
+**Step 2: ask one question at a time.** Do not send a list of questions. Send a single question, stop, and wait for the answer. Then ask the next one. This is easier to answer, and an answer often settles or changes a later question, so you avoid asking things that no longer matter.
+- Order: the real gaps first, most important first (the ones that change tables, roles or status values before the ones that change wording). The flow chart question comes last: "Do you need a flow chart in Workflow Understanding?" (see "Flow chart" below). Ask it every time.
+- Each question is short and plain. Name the section it affects. Where one answer is likely, offer it as a suggestion the user can accept with "ok". If your tool has a built-in way to ask a question with choices, use it; otherwise write the question in the chat.
+- Do not ask about things the prompt, the code or an earlier answer already settles, and do not pad. If there are no real gaps, the flow chart question is the only one.
+- When the user answers "you decide" or "skip", use the plainest default for that item (see step 3) and go on to the next question.
 
-Then stop and wait for the answers. Do not write the document first and ask later.
+When all questions are answered, write the document. Do not write the document first and ask later.
 
 **Step 3: write the document with the answers.** Write each answer as a normal requirement, in the same style as every other row. If the user says "you decide" or leaves a question unanswered, take the plainest default that matches the prompt's own pattern, or leave that detail out. A shorter true row is better than an invented one. Do not ask the same question again.
 
@@ -40,7 +42,7 @@ The scope rules still hold: an answer or a default must never add a table, colum
 
 If the run is unattended and nobody can answer, skip the flow chart, close the gaps with the plainest defaults as described above, and write the document.
 
-If a name in the prompt looks like a spelling mistake, use the real name from the code in repo mode. Without the code, include it in the questions in step 2 if it matters, or else use it as written.
+If a name in the prompt looks like a spelling mistake, use the real name from the code in repo mode. Without the code, ask about it as one of the questions in step 2 if it matters, or else use it as written.
 
 ## Works in any AI tool
 
@@ -88,7 +90,7 @@ The final deliverable is always a Word document (`.docx`), because developers an
 
 ## Flow chart (optional, Mermaid design)
 
-The flow chart is optional, so always ask the user in the question message (see "Ask first"): "Do you need a flow chart in Workflow Understanding?" If the answer is no, Workflow Understanding is a lead sentence plus short numbered steps. If the answer is yes, put the chart under the lead sentence and keep the same numbered steps under it.
+The flow chart is optional, so always ask the user, as the last of your questions (see "Ask first"): "Do you need a flow chart in Workflow Understanding?" If the answer is no, Workflow Understanding is a lead sentence plus short numbered steps. If the answer is yes, put the chart under the lead sentence and keep the same numbered steps under it.
 
 The chart is a Mermaid flowchart design, shown in the Word file as a picture. The reader must see boxes, a decision diamond and arrows, not Mermaid text. Mermaid source pasted into Word looks like code and is not what the user wants.
 
@@ -102,7 +104,7 @@ The chart is a Mermaid flowchart design, shown in the Word file as a picture. Th
 Section 3 is about what this feature uses and what it can affect. It is not a list of code files.
 
 - **Repo mode:** search the codebase. Identify all internal and external dependencies: modules, features, functions, tables, jobs, mails, roles, settings and existing workflows that may be affected. Check other places that update the same status or the same tables. Report what you found in a table: Type, Item, Why it matters.
-- **If the rough prompt has a Dependencies note** (for example "does not affect any other module" or "no external package is used"), use it as the stated position. In repo mode, still check the code. If the code shows a conflict, raise it in the question message and write what the user decides, or what the code shows if the user does not decide.
+- **If the rough prompt has a Dependencies note** (for example "does not affect any other module" or "no external package is used"), use it as the stated position. In repo mode, still check the code. If the code shows a conflict, ask about it as one of your questions and write what the user decides, or what the code shows if the user does not decide.
 - **External dependencies and packages:** mention them only if the rough prompt mentions them. If the prompt says none, or says nothing, write "None expected". Existing services that the feature must use (mail service, queue, role check) can be listed as existing, without product names.
 - **Chat mode:** list what the rough prompt implies (tables, roles, settings, mail, queue) in the same table.
 
@@ -144,7 +146,7 @@ Everything must come from the rough prompt (or, in repo mode, the code). Do not 
 - Check that the section references in the checklist point to sections that exist.
 - Check that no technology name and no code block is present, and that Mermaid text is not in the document. If the user wanted a flow chart, check that it is in as a picture with boxes, a decision diamond and arrows.
 - Check that the file is a real `.docx` and that no disclaimer note is in it.
-- Check that the questions were asked before writing, and that every answer is in the document as a normal statement.
+- Check that the questions were asked one at a time before writing, and that every answer is in the document as a normal statement.
 - The chat reply after writing is one line with the file path of the Word document. Ask nothing new at this point.
 
 ## How to install (for the user)
