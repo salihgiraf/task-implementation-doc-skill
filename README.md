@@ -28,22 +28,22 @@ You need Node.js installed. The commands use the open `skills` CLI (the same one
 ### Install for all supported tools (asks you to choose)
 
 ```bash
-npx skills add swalihvmbazar/task-implementation-doc-skill
+npx skills add salihgiraf/task-implementation-doc-skill
 ```
 
 ### Install for one tool
 
 | Tool | Command |
 | --- | --- |
-| Claude Code | `npx skills add swalihvmbazar/task-implementation-doc-skill -a claude-code` |
-| Codex | `npx skills add swalihvmbazar/task-implementation-doc-skill -a codex` |
-| Cursor | `npx skills add swalihvmbazar/task-implementation-doc-skill -a cursor` |
-| GitHub Copilot | `npx skills add swalihvmbazar/task-implementation-doc-skill -a github-copilot` |
+| Claude Code | `npx skills add salihgiraf/task-implementation-doc-skill -a claude-code` |
+| Codex | `npx skills add salihgiraf/task-implementation-doc-skill -a codex` |
+| Cursor | `npx skills add salihgiraf/task-implementation-doc-skill -a cursor` |
+| GitHub Copilot | `npx skills add salihgiraf/task-implementation-doc-skill -a github-copilot` |
 
 ### Install for several tools at once
 
 ```bash
-npx skills add swalihvmbazar/task-implementation-doc-skill -a claude-code -a codex -a cursor -a github-copilot
+npx skills add salihgiraf/task-implementation-doc-skill -a claude-code -a codex -a cursor -a github-copilot
 ```
 
 ### Project or global
@@ -52,17 +52,17 @@ npx skills add swalihvmbazar/task-implementation-doc-skill -a claude-code -a cod
 - Add `-g` to install for your user, so it works in every project.
 
 ```bash
-npx skills add swalihvmbazar/task-implementation-doc-skill -g -a claude-code
+npx skills add salihgiraf/task-implementation-doc-skill -g -a claude-code
 ```
 
 ### Other useful commands
 
 ```bash
 # See what is inside the repository before installing
-npx skills add swalihvmbazar/task-implementation-doc-skill --list
+npx skills add salihgiraf/task-implementation-doc-skill --list
 
 # Install without questions
-npx skills add swalihvmbazar/task-implementation-doc-skill --skill task-implementation-doc-skill -a claude-code -y
+npx skills add salihgiraf/task-implementation-doc-skill --skill task-implementation-doc-skill -a claude-code -y
 
 # See installed skills
 npx skills list
